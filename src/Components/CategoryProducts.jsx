@@ -161,7 +161,10 @@ const women =[
     color: ["#201658"],
   },
 ]
-
+const dataArray = {
+  '/men': men,
+  '/Women': women,
+};
 const CategoryProducts = (data) => {
   
 
@@ -172,7 +175,7 @@ const CategoryProducts = (data) => {
     <h2 className="sr-only">Products</h2>
 
     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-      {data.location === '/men' ? men.map((product) => (
+    {dataArray[data.location] ? dataArray[data.location].map((product) => (
         <a key={product.id} href={product.href} className="group">
           <div className="aspect-h-1 aspect-w-1 lg:aspect-h-8 lg:aspect-w-7 h-96 overflow-hidden rounded-lg bg-white">
             <img
@@ -184,19 +187,7 @@ const CategoryProducts = (data) => {
           <ProductColors colors={product.color} />
           <p className="mt-1 text-lg font-medium text-center text-gray-900">{product.price}</p>
         </a>
-      )) : women.map((product) => (
-        <a key={product.id} href={product.href} className="group">
-          <div className="aspect-h-1 aspect-w-1 lg:aspect-h-8 lg:aspect-w-7 h-96 overflow-hidden rounded-lg bg-white">
-            <img
-              src={product.imageSrc}
-              alt={product.imageAlt}
-              className="h-full w-full object-contain object-center group-hover:opacity-75"
-            />
-          </div>
-          <ProductColors colors={product.color} />
-          <p className="mt-1 text-lg font-medium text-center text-gray-900">{product.price}</p>
-        </a>
-      ))}
+      )) : null}
     </div>
   </div>
 </div>
