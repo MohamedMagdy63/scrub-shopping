@@ -11,7 +11,7 @@ const Navbar = () => {
         <li className="relative overflow-hidden">
           <Link
             to='/men'
-            className="relative p-10"
+            className="relative p-5"
           >
             Men
           </Link>
@@ -19,7 +19,7 @@ const Navbar = () => {
         <li className="relative overflow-hidden">
           <Link
             to='/Women'
-            className="relative p-10"
+            className="relative p-5"
           >
             Women
           </Link>
@@ -27,7 +27,7 @@ const Navbar = () => {
         <li className="relative overflow-hidden">
           <Link
             to='/About'
-            className="relative p-10"
+            className="relative p-5"
           >
             About
           </Link>
