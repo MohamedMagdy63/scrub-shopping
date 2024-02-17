@@ -35,26 +35,22 @@ const callouts = [
       href: '#',
     },
   ]
-const AllProducts = () => {
-  
-
-  return (
-    // Container
-    <div className="max-w-full">
-      <h1 className="text-center font-semibold text-3xl p-5 md:text-4xl lg:text-5xl xl:text-6xl p-10">
-        MODERN MEDICAL SCRUBS
-      </h1>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-1">
-        {callouts.map((product) => (
-          <div key={product.name} className="flex items-center justify-center">
-            <img src={product.imageSrc} className="h-full p-2" alt={product.imageAlt} />
-          </div>
-        ))}
+  const AllProducts = () => {
+    return (
+      <div className="max-w-full">
+        <h1 className="text-center font-semibold text-3xl p-5 md:text-4xl lg:text-5xl xl:text-6xl p-10">
+          MODERN MEDICAL SCRUBS
+        </h1>
+        <div className="grid grid-cols-2 gap-4">
+          {callouts.map((product) => (
+            <div key={product.name} className="flex items-center justify-center">
+              <img src={product.imageSrc} className="h-full p-2" alt={product.imageAlt} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-
-
-  );
-}
+    );
+  };
+    
 
 export default AllProducts;
