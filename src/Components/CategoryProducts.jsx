@@ -182,7 +182,7 @@ const CategoryProducts = (data) => {
             />
           </div>
           <ProductColors colors={product.color} />
-          <p className="mt-1 text-lg font-medium text-right text-gray-900">{product.price}</p>
+          <p className="mt-1 text-lg font-medium text-center text-gray-900">{product.price}</p>
         </a>
       )) : women.map((product) => (
         <a key={product.id} href={product.href} className="group">
@@ -194,7 +194,7 @@ const CategoryProducts = (data) => {
             />
           </div>
           <ProductColors colors={product.color} />
-          <p className="mt-1 text-lg font-medium text-right text-gray-900">{product.price}</p>
+          <p className="mt-1 text-lg font-medium text-center text-gray-900">{product.price}</p>
         </a>
       ))}
     </div>
