@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import arabicLogo from "../Data/Images/ArabicLogo.PNG";
 import H_Logo from "../Data/Images/H_Logo.PNG";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
@@ -48,33 +49,20 @@ const Navbar = () => {
 
       {/* Search bar */}
       <div className="flex items-center w-90">
-  <div className="ml-auto w-full">
-    <div className="relative">
-      <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-        {/* Your search icon */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          className="h-6 w-6 text-gray-500"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M21 21l-6-6m4-6h-1a8 8 0 1 0-16 0h-1"
+        <div className="ml-auto w-full">
+        <div className="relative">
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+            {/* Your search icon */}
+            <FontAwesomeIcon icon={faSearch} className="h-5 w-5 text-gray-400" />
+          </div>
+          <input
+            type="text"
+            placeholder="Search"
+            className="bg-gray-100 px-5 pl-10 pr-2 py-2 text-sm rounded-full focus:outline-none focus:ring focus:border-white w-full"
           />
-        </svg>
+          </div>
+        </div>
       </div>
-      <input
-        type="text"
-        placeholder="Search"
-        className="bg-gray-100 px-5 pl-10 pr-2 py-2 text-sm rounded-full focus:outline-none focus:ring focus:border-white w-full"
-      />
-      </div>
-    </div>
-  </div>
 
 
       {/* Menu button for small screens */}
@@ -83,13 +71,7 @@ const Navbar = () => {
           onClick={handleMenuToggle}
           className="text-white p-2 focus:outline-none"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="h-6 w-6"
-          >
+          <FontAwesomeIcon icon={faSearch} className="h-5 w-5 text-gray-400" />
             {isMenuOpen ? (
               <path
                 strokeLinecap="round"
@@ -105,7 +87,6 @@ const Navbar = () => {
                 d="M4 6h16M4 12h16m-7 6h7"
               />
             )}
-          </svg>
         </button>
       </div>
 
