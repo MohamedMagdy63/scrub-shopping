@@ -71,7 +71,13 @@ const Navbar = () => {
           onClick={handleMenuToggle}
           className="text-white p-2 focus:outline-none"
         >
-          <FontAwesomeIcon icon={faSearch} className="h-5 w-5 text-gray-400" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="h-6 w-6"
+          >
             {isMenuOpen ? (
               <path
                 strokeLinecap="round"
@@ -87,6 +93,7 @@ const Navbar = () => {
                 d="M4 6h16M4 12h16m-7 6h7"
               />
             )}
+          </svg>
         </button>
       </div>
 
