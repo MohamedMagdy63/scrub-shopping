@@ -7,6 +7,9 @@ module.exports = {
     "src/Components/MainColors.jsx",
     "src/Components/ProductDetails.jsx",
     "src/Components/CategoryProducts.jsx",
+    "src/Components/ProductDialog.jsx",
+
+    
 
 ],
   theme: {

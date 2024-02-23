@@ -10,6 +10,7 @@ import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 
 
 const products = [
@@ -17,7 +18,7 @@ const products = [
   {
     id: 1,
     name: 'Royal Blue Scrub',
-    href: '/Details',
+    src: '/product',
     imageSrc: blueImage,
     imageAlt: "Royal Blue Scrub.",
     price: '00.00',
@@ -26,7 +27,7 @@ const products = [
   {
     id: 2,
     name: 'Black Scrub',
-    href: '/',
+    src: '/product',
     imageSrc: blackImage,
     imageAlt: "Black Scrub",
     price: '00:00',
@@ -35,7 +36,7 @@ const products = [
   {
     id: 3,
     name: 'Olive',
-    href: '/',
+    src: '/product',
     imageSrc: Olive,
     imageAlt: "Olive Scrub",
     price: '00:00',
@@ -44,7 +45,7 @@ const products = [
   {
     id: 4,
     name: 'Navy',
-    href: '/',
+    src: '/product',
     imageSrc: Navy,
     imageAlt: "Navy",
     price: '00:00',
@@ -117,10 +118,10 @@ const MainColors = () => {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <a href={product.href}>
+                      <Link to={product.src}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {product.name}
-                      </a>
+                      </Link>
                     </h3>
                       <ProductColors colors={product.color} />
                   </div>

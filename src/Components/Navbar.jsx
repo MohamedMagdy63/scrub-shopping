@@ -20,7 +20,7 @@ const Navbar = () => {
       </Link>
 
       {/* Navigation links for large screens */}
-      <ul className=" hidden lg:flex lg:flex-row lg:justify-center lg:font-semibold text-white lg:space-x-12 lg:text-lg lg:text-center">
+      <ul className=" hidden lg:flex lg:flex-row lg:justify-center lg:font-semibold font-serif text-white lg:space-x-12 lg:text-lg lg:text-center">
         <li className="relative overflow-hidden">
           <Link
             to='/men'
@@ -48,7 +48,7 @@ const Navbar = () => {
       </ul>
 
       {/* Search bar */}
-      <div className="flex items-center w-90">
+      <div className="flex items-center w-90 mx-10">
         <div className="ml-auto w-full">
         <div className="relative">
           <div className="absolute left-3 top-1/2 transform -translate-y-1/2">

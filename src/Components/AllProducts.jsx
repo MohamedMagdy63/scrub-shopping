@@ -3,6 +3,7 @@ import black from "../Data/Images/1.JPG"
 import threemodels from "../Data/Images/2.JPG"
 import secondBlue from "../Data/Images/1_side.JPG"
 import blue from "../Data/Images/4.JPG"
+import { Link } from 'react-router-dom';
 
 
 const callouts = [
@@ -11,28 +12,28 @@ const callouts = [
       description: 'Work from home accessories',
       imageSrc: black,
       imageAlt: 'Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug.',
-      href: '#',
+      src: '/product',
     },
     {
       name: 'Self-Improvement',
       description: 'Journals and note-taking',
       imageSrc: threemodels,
       imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
-      href: '#',
+      src: '/product',
     },
     {
       name: 'Travel',
       description: 'Daily commute essentials',
       imageSrc:secondBlue,
       imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-      href: '#',
+      src: '/product',
     },
     {
       name: 'Travel',
       description: 'Daily commute essentials',
       imageSrc:blue,
       imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-      href: '#',
+      src: '/product',
     },
   ]
   const AllProducts = () => {
@@ -43,9 +44,10 @@ const callouts = [
         </h1>
         <div className="grid grid-cols-2 gap-4">
           {callouts.map((product) => (
-            <div key={product.name} className="flex items-center justify-center">
-              <img src={product.imageSrc} className="h-full p-2" alt={product.imageAlt} />
-            </div>
+            <Link to={product.src} className="flex items-center justify-center">
+              <img src={product.imageSrc} className="h-full" alt={product.imageAlt} />
+            </Link>
+            
           ))}
         </div>
       </div>
