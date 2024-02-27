@@ -150,6 +150,7 @@ const women =[
   },
 ]
 const ProductColors = ({ colors }) => {
+  
   return (
     <div className="flex items-center justify-center space-x-2">
       {colors.map((color, index) => (

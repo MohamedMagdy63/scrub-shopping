@@ -4,17 +4,12 @@ import blueImage from "../Data/Images/RoyalBlue.JPG"
 import blackImage from "../Data/Images/Black.JPG"
 import Olive from "../Data/Images/Olive.JPG"
 import Navy from "../Data/Images/Navy.JPG"
-
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-
-
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 
-
-const products = [
-  
+const products = [ 
   {
     id: 1,
     name: 'Royal Blue Scrub',
@@ -51,7 +46,6 @@ const products = [
     price: '00:00',
     color: ["#201658"],
   },
-  // More products...
 ]
 const ProductColors = ({ colors }) => {
   return (
@@ -72,15 +66,12 @@ const MainColors = () => {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-
-  // Function to update screen size when window is resized
   const updateScreenSize = () => {
     setScreenSize({
       width: window.innerWidth,
       height: window.innerHeight,
     });
   };
-
   // Subscribe to the resize event on component mount
   useEffect(() => {
     window.addEventListener('resize', updateScreenSize);
@@ -91,7 +82,6 @@ const MainColors = () => {
     };
   }, []); // Empty dependency array ensures the effect runs only once during component mount
 
-  
   const settings = {
     infinite: true,
     slidesToShow: screenSize.width >= 500 ? 4: 1, 
@@ -99,7 +89,6 @@ const MainColors = () => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-
   return (
     <div className='m-1 h-fit'>
       <h1 className='p-3 text-4xl font-semibold text-center'>Shop By Color</h1>
@@ -135,7 +124,6 @@ const MainColors = () => {
     </div>
   );
 };
-
 const SampleNextArrow = (props) => {
   const { onClick } = props;
   return (
@@ -144,7 +132,6 @@ const SampleNextArrow = (props) => {
     </div>
   );
 };
-
 const SamplePrevArrow = (props) => {
   const { onClick } = props;
   return (

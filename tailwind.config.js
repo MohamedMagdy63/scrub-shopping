@@ -8,6 +8,10 @@ module.exports = {
     "src/Components/ProductDetails.jsx",
     "src/Components/CategoryProducts.jsx",
     "src/Components/ProductDialog.jsx",
+    "src/Components/PlaceOrder.jsx",
+    "src/Components/Footer.jsx",
+    "src/Pages/About.jsx",
+    
 
     
 

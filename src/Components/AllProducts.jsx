@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import black from "../Data/Images/1.JPG"
 import threemodels from "../Data/Images/2.JPG"
 import secondBlue from "../Data/Images/1_side.JPG"
@@ -37,6 +37,10 @@ const callouts = [
     },
   ]
   const AllProducts = () => {
+    useEffect(() => {
+      // Scroll to the top of the page when the component mounts (page loads)
+      window.scrollTo(0, 0);
+    }, []);
     return (
       <div className="max-w-full">
         <h1 className="text-center font-semibold text-3xl p-5 md:text-4xl lg:text-5xl xl:text-6xl p-10">

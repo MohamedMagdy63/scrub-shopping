@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState  } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import threemodels from "../Data/Images/2.JPG"
 import secondBlue from "../Data/Images/1_side.JPG"
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 
 const product = {
   name: 'Blue',
@@ -25,8 +26,6 @@ const product = {
     },
   ],
   colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
   ],
   sizes: [
@@ -60,7 +59,7 @@ export default function ProductDialog() {
       <div className="bg-white">
         <div className="pt-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb">
-            <ol role="list" className="flex items-center space-x-2 px-4 sm:px-6">
+            <ul role="list" className="flex items-center space-x-2 px-4 sm:px-6">
               {product.breadcrumbs.map((breadcrumb) => (
                 <li key={breadcrumb.id}>
                   <div className="flex items-center">
@@ -85,7 +84,7 @@ export default function ProductDialog() {
                   {product.name}
                 </a>
               </li>
-            </ol>
+            </ul>
           </nav>
           {/* Image gallery and Product info */}
         <div className="flex flex-col lg:flex-row lg:mt-6 lg:space-x-8">
@@ -166,9 +165,9 @@ export default function ProductDialog() {
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                  <Link to="/about" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                     Size guide
-                  </a>
+                  </Link>
                 </div>
 
                 <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
@@ -223,13 +222,10 @@ export default function ProductDialog() {
                   </div>
                 </RadioGroup>
               </div>
-
-              <button
-                type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-[#AAD7D9] px-8 py-3 text-base font-medium text-white hover:bg-[#92C7CF] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Add to bag
-              </button>
+              <Link to='/order' className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-[#AAD7D9] px-8 py-3 text-base font-medium text-white hover:bg-[#92C7CF] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                Oreder Now
+              </Link>
+              
             </form>
             </div>
           </div>
