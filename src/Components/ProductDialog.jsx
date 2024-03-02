@@ -5,7 +5,7 @@ import secondBlue from "../Data/Images/1_side.JPG"
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const product = {
   name: 'Blue',
@@ -28,16 +28,17 @@ const product = {
   colors: [
     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
   ],
-  sizes: [
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: '2XL', inStock: true },
-    { name: '3XL', inStock: true },
-  ],
+  
   
 }
+const sizes = [
+  { name: 'S', inStock: true },
+  { name: 'M', inStock: true },
+  { name: 'L', inStock: true },
+  { name: 'XL', inStock: true },
+  { name: '2XL', inStock: true },
+  { name: '3XL', inStock: true },
+]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -45,9 +46,9 @@ function classNames(...classes) {
 
 // ... (previous imports and product definition)
 
-export default function ProductDialog() {
-    const [selectedColor, setSelectedColor] = useState(product.colors[0])
-    const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+export default function ProductDialog({loading,error,data,productId}) {
+    const [selectedSize, setSelectedSize] = useState(sizes[0])
+    const navigate = useNavigate()
     const sliderSettings = {
         dots: true,
         infinite: true,
@@ -55,11 +56,15 @@ export default function ProductDialog() {
         slidesToShow: 1,
         slidesToScroll: 1,
       };
+
+    if(loading) return <p>Loading....</p>
+    if(error) return <p>Error! {console.error(error)}</p>
+    
     return (
       <div className="bg-white">
         <div className="pt-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb">
-            <ul role="list" className="flex items-center space-x-2 px-4 sm:px-6">
+            <ul className="flex items-center space-x-2 px-4 sm:px-6">
               {product.breadcrumbs.map((breadcrumb) => (
                 <li key={breadcrumb.id}>
                   <div className="flex items-center">
@@ -92,26 +97,29 @@ export default function ProductDialog() {
           <div className="lg:flex-shrink-0 lg:w-1/2">
             {/* First image with hover effect */}
             <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block relative">
-              <img
-                src={product.images[0].src}
-                alt={product.images[0].alt}
-                className="h-full w-full object-cover object-center"
-              />
-              <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
-                className="h-full w-full object-cover object-center opacity-0 absolute top-0 left-0 transition-opacity duration-300 hover:opacity-100"
-              />
+              {
+                data.product.image.map((imge,idx)=>(
+                  <img
+                    src={`${process.env.REACT_APP_API_URL_IMAGE}/${imge}`}
+                    alt='Product'
+                    className={
+                      idx === 0 ? 
+                      `h-full w-full object-cover object-center` 
+                      :
+                      `h-full w-full object-cover object-center opacity-0 absolute top-0 left-0 transition-opacity duration-300 hover:opacity-100`}
+                  />
+                ))
+              }
             </div>
 
             {/* Second image for small screens */}
             <div className="lg:hidden mt-4">
             <Slider {...sliderSettings}>
-                {product.images.map((image, index) => (
+                {data.product.image.map((image, index) => (
                   <div key={index}>
                     <img
-                      src={image.src}
-                      alt={image.alt}
+                      src={`${process.env.REACT_APP_API_URL_IMAGE}/${image}`}
+                      alt='Product'
                       className="h-full w-full object-cover object-center"
                     />
                   </div>
@@ -123,42 +131,20 @@ export default function ProductDialog() {
             {/* Product info */}
             <div className="lg:w-1/2">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+              <p className="text-3xl tracking-tight text-gray-900">{data.product.price}</p>
               <form className="mt-10">
               {/* Colors */}
               <div>
                 <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
-                <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
-                  <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
                   <div className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
-                      <RadioGroup.Option
-                        key={color.name}
-                        value={color}
-                        className={({ active, checked }) =>
-                          classNames(
-                            color.selectedClass,
-                            active && checked ? 'ring ring-offset-1' : '',
-                            !active && checked ? 'ring-2' : '',
-                            'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
-                          )
-                        }
-                      >
-                        <RadioGroup.Label as="span" className="sr-only">
-                          {color.name}
-                        </RadioGroup.Label>
-                        <span
-                          aria-hidden="true"
-                          className={classNames(
-                            color.class,
-                            'h-8 w-8 rounded-full border border-black border-opacity-10'
-                          )}
-                        />
-                      </RadioGroup.Option>
-                    ))}
+                    <div className="flex items-center space-x-2">
+                      <div
+                        className="w-8 h-8 rounded-full"
+                        style={{ backgroundColor: data.product.color, border: "1px solid #ccc" }}
+                        title={data.product.color}
+                      />
+                    </div>
                   </div>
-                </RadioGroup>
               </div>
 
               {/* Sizes */}
@@ -169,11 +155,11 @@ export default function ProductDialog() {
                     Size guide
                   </Link>
                 </div>
-
+                  {console.log(selectedSize)}
                 <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                   <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                    {product.sizes.map((size) => (
+                    {sizes.map((size) => (
                       <RadioGroup.Option
                         key={size.name}
                         value={size}
@@ -222,9 +208,13 @@ export default function ProductDialog() {
                   </div>
                 </RadioGroup>
               </div>
-              <Link to='/order' className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-[#AAD7D9] px-8 py-3 text-base font-medium text-white hover:bg-[#92C7CF] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <div className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-[#AAD7D9] cursor-pointer px-8 py-3 text-base font-medium text-white hover:bg-[#92C7CF] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              onClick={()=>{
+                navigate('/order',{state:{sizeVal: selectedSize, productId:productId}})
+              }}
+              >
                 Oreder Now
-              </Link>
+              </div>
               
             </form>
             </div>

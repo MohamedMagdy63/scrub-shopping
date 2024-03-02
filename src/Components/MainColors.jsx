@@ -1,67 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import blueImage from "../Data/Images/RoyalBlue.JPG"
-import blackImage from "../Data/Images/Black.JPG"
-import Olive from "../Data/Images/Olive.JPG"
-import Navy from "../Data/Images/Navy.JPG"
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 
-const products = [ 
-  {
-    id: 1,
-    name: 'Royal Blue Scrub',
-    src: '/product',
-    imageSrc: blueImage,
-    imageAlt: "Royal Blue Scrub.",
-    price: '00.00',
-    color: ["#1D24CA"],
-  },
-  {
-    id: 2,
-    name: 'Black Scrub',
-    src: '/product',
-    imageSrc: blackImage,
-    imageAlt: "Black Scrub",
-    price: '00:00',
-    color: ["#000"],
-  },
-  {
-    id: 3,
-    name: 'Olive',
-    src: '/product',
-    imageSrc: Olive,
-    imageAlt: "Olive Scrub",
-    price: '00:00',
-    color: ["#436850"],
-  },
-  {
-    id: 4,
-    name: 'Navy',
-    src: '/product',
-    imageSrc: Navy,
-    imageAlt: "Navy",
-    price: '00:00',
-    color: ["#201658"],
-  },
-]
-const ProductColors = ({ colors }) => {
+// const products = [ 
+//   {
+//     id: 1,
+//     name: 'Royal Blue Scrub',
+//     src: '/product',
+//     imageSrc: blueImage,
+//     imageAlt: "Royal Blue Scrub.",
+//     price: '00.00',
+//     color: ["#1D24CA"],
+//   },
+//   {
+//     id: 2,
+//     name: 'Black Scrub',
+//     src: '/product',
+//     imageSrc: blackImage,
+//     imageAlt: "Black Scrub",
+//     price: '00:00',
+//     color: ["#000"],
+//   },
+//   {
+//     id: 3,
+//     name: 'Olive',
+//     src: '/product',
+//     imageSrc: Olive,
+//     imageAlt: "Olive Scrub",
+//     price: '00:00',
+//     color: ["#436850"],
+//   },
+//   {
+//     id: 4,
+//     name: 'Navy',
+//     src: '/product',
+//     imageSrc: Navy,
+//     imageAlt: "Navy",
+//     price: '00:00',
+//     color: ["#201658"],
+//   },
+// ]
+const ProductColors = ({ color }) => {
   return (
     <div className="flex items-center space-x-2">
-      {colors.map((color, index) => (
-        <div
-          key={index}
-          className="w-6 h-6 rounded-full"
-          style={{ backgroundColor: color, border: "1px solid #ccc" }}
-          title={color}
-        />
-      ))}
+      <div
+        className="w-6 h-6 rounded-full"
+        style={{ backgroundColor: color, border: "1px solid #ccc" }}
+        title={color}
+      />
     </div>
   );
 };
-const MainColors = () => {
+const MainColors = ({loading,error,data}) => {
   const [screenSize, setScreenSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -89,30 +82,34 @@ const MainColors = () => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+
+  if(loading) return <p>Loading....</p>
+  if(error) return <p>Error! {console.error(error)}</p>
+
   return (
     <div className='m-1 h-fit'>
       <h1 className='p-3 text-4xl font-semibold text-center'>Shop By Color</h1>
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
           <Slider {...settings}>
-            {products.map((product) => (
+            {data.productsFeed.map((product) => (
               <div key={product.id} className="group relative">
                 <div className="aspect-h-1 bg-gray-100 border aspect-w-1 w-full overflow-hidden rounded-md  lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
-                    src={product.imageSrc}
-                    alt={product.imageAlt}
-                    className="h-full w-full object-center lg:h-full lg:w-full rounded-full"
+                    src={`${process.env.REACT_APP_API_URL_IMAGE}/${product.image[0]}`}
+                    alt="Product"
+                    className="h-full w-full object-cover lg:h-full lg:w-full rounded-full"
                   />
                 </div>
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <Link to={product.src}>
+                      <Link to={`/product/${product.id}`}>
                         <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
+                        {product.status}
                       </Link>
                     </h3>
-                      <ProductColors colors={product.color} />
+                      <ProductColors color={product.color} />
                   </div>
                   <p className="text-sm font-medium px-5 text-gray-900">{product.price}</p>
                 </div>

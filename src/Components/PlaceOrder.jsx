@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+import { CheckPromoCode } from "../gql/Query";
+import { Alert } from "@mui/material";
 
-function PlaceOrder() {
+function PlaceOrder({ size, productId, action }) {
     const [fullName , setFullName ] = useState(null)
     const [email , setEmail ] = useState(null)
     const [phone , setPhone ] = useState(null)
@@ -10,6 +13,26 @@ function PlaceOrder() {
     const [address , setAdress ] = useState(null)
     const [question , setQuestions ] = useState(null)
     const [promo , setPromo ] = useState(false)
+    const [promoCodeIsExpired , setPromoCodeIsExpired ] = useState(true)
+    const [promoCode , setPromoCode ] = useState(null)
+    const [promoCodeId , setPromoCodeId ] = useState(null)
+    const [transactionId , setTransactionId ] = useState(null)
+    const [activeErrorMsg,setActiveErrorMsg] = useState(false)
+
+    const {loading,error,data} = useQuery(CheckPromoCode,{variables:{code:promoCode}})
+    useEffect(()=>{
+        if(data){
+            setPromoCodeIsExpired(data.checkPromocode.expired)
+            setPromoCodeId(data.checkPromocode.id)
+        }
+    },[data])
+    useEffect(()=>{
+        setTimeout(() => {
+            setActiveErrorMsg(false)
+        }, 2000);
+    },[activeErrorMsg])
+
+
     const handleFullName = (event) =>{
         setFullName(event.target.value)
     }
@@ -34,17 +57,36 @@ function PlaceOrder() {
     const handleQuestion = (event) =>{
         setQuestions(event.target.value)
     }
-    const handlePromo = (event) =>{
-        setPromo(event.target.value)
-        
-    }
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log(fullName,payment ,promo ,email, phone , anotherPhone , address , amount , question)
+        if(promoCode && promoCodeIsExpired){
+            setActiveErrorMsg(true)
+            return
+        }
+        let handleOrder = {
+            username: fullName,
+            email: email,
+            phone: phone,
+            otherPhone: anotherPhone,
+            address: address,
+            size: [size.name],
+            amount: [parseFloat(amount)],
+            payway: payment,
+            commentQ: question,
+            orderNumber: parseFloat(transactionId),
+            discountCode: promoCodeId,
+            productOrder: [productId]
+        }
+        console.log(handleOrder)
+        action({variables: handleOrder})
     }
   return (
     <>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e)=>{handleSubmit(e)}}>
+            {
+                activeErrorMsg && 
+                    <Alert severity="error"> Promo code expired</Alert>
+            }
             <div className="space-y-12 px-10">
                 <div className="border-b border-gray-900/10 pb-12">
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -172,12 +214,15 @@ function PlaceOrder() {
                                     id="cash-on-delivery"
                                     name="payment-method"
                                     value="promo"
-                                    onChange={handlePromo}
+                                    onChange={()=>{
+                                        setPromo(!promo)
+                                        setPromoCode(null)
+                                    }}
                                     className="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
                                 />
                                 <span className="ml-2 text-sm text-gray-900">Redeem</span>
                             </div>
-                            {promo === 'promo' && (
+                            {promo ? (
                                 <div className="sm:col-span-3">
                                     <label htmlFor="promo-code" className="block text-sm font-medium leading-6 text-gray-900">
                                         Your Promo 
@@ -187,10 +232,20 @@ function PlaceOrder() {
                                             id="promo-code"
                                             name="promo-code"
                                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  sm:text-m sm:leading-6 outline-none"
+                                            onChange={(e)=>{
+                                                setPromoCode(e.target.value)
+                                            }}
                                         />
                                     </div>
+                                    {
+                                        promoCode &&
+                                            <>
+                                                {loading && <p>Loading...</p> }
+                                                {error && <p>Invalid Promo Code</p>}
+                                            </> 
+                                    }
                                 </div>
-                            )}
+                            ):''}
                         </div>
                         <div className="sm:col-span-3">
                             <label htmlFor="payment-method" className="block text-sm font-medium leading-6 text-gray-900">
@@ -244,6 +299,9 @@ function PlaceOrder() {
                                                 id="transaction-id"
                                                 name="transaction-id"
                                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  sm:text-m sm:leading-6 outline-none"
+                                                onChange={(e)=>{
+                                                    setTransactionId(e.target.value)
+                                                }}
                                             />
                                         </div>
                                     </div>

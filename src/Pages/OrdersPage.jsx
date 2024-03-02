@@ -2,8 +2,18 @@ import React, { useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import PlaceOrder from '../Components/PlaceOrder';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { MakeOrder } from '../gql/Mutation'
 
 function OrdersPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [makeOrder] = useMutation(MakeOrder,{
+    onCompleted:()=>{
+    navigate('/')
+    }
+  }) 
   useEffect(() => {
     // Scroll to the top of the page when the component mounts (page loads)
     window.scrollTo(0, 0);
@@ -11,7 +21,7 @@ function OrdersPage() {
   return (
     <>
         <Navbar/>
-        <PlaceOrder/>
+        <PlaceOrder size={location.state.sizeVal} productId={location.state.productId} action={makeOrder}/>
         <Footer/>
     </>
   );
