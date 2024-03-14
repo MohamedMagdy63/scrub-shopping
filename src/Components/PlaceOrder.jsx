@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { CheckPromoCode } from "../gql/Query";
 import { Alert } from "@mui/material";
 
-function PlaceOrder({ size, productId, action }) {
+function PlaceOrder({ size, productId, basicPrice, action }) {
     const [fullName , setFullName ] = useState(null)
     const [email , setEmail ] = useState(null)
     const [phone , setPhone ] = useState(null)
@@ -18,12 +18,14 @@ function PlaceOrder({ size, productId, action }) {
     const [promoCodeId , setPromoCodeId ] = useState(null)
     const [transactionId , setTransactionId ] = useState(null)
     const [activeErrorMsg,setActiveErrorMsg] = useState(false)
+    const [promoCodeDiscount , setPromoCodeDiscount ] = useState(null)
 
     const {loading,error,data} = useQuery(CheckPromoCode,{variables:{code:promoCode}})
     useEffect(()=>{
         if(data){
             setPromoCodeIsExpired(data.checkPromocode.expired)
             setPromoCodeId(data.checkPromocode.id)
+            setPromoCodeDiscount(data.checkPromocode.discount)
         }
     },[data])
     useEffect(()=>{
@@ -61,6 +63,7 @@ function PlaceOrder({ size, productId, action }) {
         event.preventDefault();
         if(promoCode && promoCodeIsExpired){
             setActiveErrorMsg(true)
+            setPromoCodeDiscount(null)
             return
         }
         let handleOrder = {
@@ -212,6 +215,10 @@ function PlaceOrder({ size, productId, action }) {
                                     onChange={()=>{
                                         setPromo(!promo)
                                         setPromoCode(null)
+                                        if(promo){
+                                            setPromoCodeId(null)
+                                            setPromoCodeDiscount(null)
+                                        }
                                     }}
                                     className="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
                                 />
@@ -327,6 +334,14 @@ function PlaceOrder({ size, productId, action }) {
                 </div>
             </div>
             <div className="mt-6 px-10 flex items-center justify-end gap-x-6">
+                <div className="flex flex-col gap-1">
+                    <p className={`lg:text-xl max-sm:text-base tracking-tight text-gray-900 ${promoCodeDiscount && !promoCodeIsExpired? 'line-through' : 'no-underline'} `}>{basicPrice} EGP</p>
+                    {
+                        promoCodeDiscount && !promoCodeIsExpired ?
+                            <p className="lg:text-xl max-sm:text-base tracking-tight text-gray-900">{parseFloat(basicPrice) - (parseFloat(basicPrice) * (parseFloat(promoCodeDiscount)/100))} EGP</p>
+                        :<></>
+                    }
+                </div>
                 <button
                 type="submit"
                 className="rounded-md bg-[#AAD7D9] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#92C7CF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

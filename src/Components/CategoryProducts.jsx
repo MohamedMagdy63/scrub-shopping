@@ -26,7 +26,7 @@ const CategoryProducts = ({loading,error,data,type}) => {
             <Link key={product.id} to={`/product/${product.id}`} className="group">
               <div className="aspect-h-1 aspect-w-1 lg:aspect-h-8 lg:aspect-w-7 h-96 overflow-hidden rounded-lg bg-white">
                 <img
-                  src={`${process.env.REACT_APP_API_URL_IMAGE}/${product.image[0]}`}
+                  src={`${product.image[0]}`}
                   alt={`${type},Product`}
                   className="h-full w-full object-contain object-center group-hover:opacity-75"
                 />

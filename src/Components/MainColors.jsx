@@ -97,7 +97,7 @@ const MainColors = ({loading,error,data}) => {
                 <div key={product.id} className="group relative">
                 <div className="aspect-h-1 bg-gray-50 border aspect-w-1 w-full overflow-hidden rounded-md  lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
-                    src={`${process.env.REACT_APP_API_URL_IMAGE}/${product.image[0]}`}
+                    src={`${product.image[0]}`}
                     alt="Product"
                     className="h-[400px] w-full object-cover lg:h-full lg:w-full rounded-full"
                   />
