@@ -131,7 +131,7 @@ export default function ProductDialog({loading,error,data,productId}) {
             {/* Product info */}
             <div className="lg:w-1/2">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">{data.product.price}</p>
+              <p className="text-3xl tracking-tight text-gray-900">{data.product.price} EGP</p>
               <form className="mt-10">
               {/* Colors */}
               <div>
@@ -210,7 +210,7 @@ export default function ProductDialog({loading,error,data,productId}) {
               </div>
               <div className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-[#AAD7D9] cursor-pointer px-8 py-3 text-base font-medium text-white hover:bg-[#92C7CF] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               onClick={()=>{
-                navigate('/order',{state:{sizeVal: selectedSize, productId:productId}})
+                navigate('/order',{state:{sizeVal: selectedSize, productId:productId, price:data.product.price}})
               }}
               >
                 Oreder Now
