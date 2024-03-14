@@ -100,7 +100,7 @@ export default function ProductDialog({loading,error,data,productId}) {
               {
                 data.product.image.map((imge,idx)=>(
                   <img
-                    src={`${process.env.REACT_APP_API_URL_IMAGE}/${imge}`}
+                    src={`${imge}`}
                     alt='Product'
                     className={
                       idx === 0 ? 
@@ -118,7 +118,7 @@ export default function ProductDialog({loading,error,data,productId}) {
                 {data.product.image.map((image, index) => (
                   <div key={index}>
                     <img
-                      src={`${process.env.REACT_APP_API_URL_IMAGE}/${image}`}
+                      src={`${image}`}
                       alt='Product'
                       className="h-full w-full object-cover object-center"
                     />

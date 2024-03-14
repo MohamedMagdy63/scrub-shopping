@@ -77,7 +77,6 @@ function PlaceOrder({ size, productId, action }) {
             discountCode: promoCodeId,
             productOrder: [productId]
         }
-        console.log(handleOrder)
         action({variables: handleOrder})
     }
   return (
