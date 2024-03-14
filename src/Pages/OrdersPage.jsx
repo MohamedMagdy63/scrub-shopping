@@ -11,7 +11,7 @@ function OrdersPage() {
   const navigate = useNavigate()
   const [makeOrder] = useMutation(MakeOrder,{
     onCompleted:()=>{
-    navigate('/')
+    navigate('/',{state:{successMsg: "Order Completed"}})
     }
   }) 
   useEffect(() => {

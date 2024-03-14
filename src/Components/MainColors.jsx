@@ -92,13 +92,14 @@ const MainColors = ({loading,error,data}) => {
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
           <Slider {...settings}>
-            {data.productsFeed.map((product) => (
-              <div key={product.id} className="group relative">
-                <div className="aspect-h-1 bg-gray-100 border aspect-w-1 w-full overflow-hidden rounded-md  lg:aspect-none group-hover:opacity-75 lg:h-80">
+            {data.productsFeed.map((product , index) => (
+              index < 5 && (
+                <div key={product.id} className="group relative">
+                <div className="aspect-h-1 bg-gray-50 border aspect-w-1 w-full overflow-hidden rounded-md  lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
                     src={`${process.env.REACT_APP_API_URL_IMAGE}/${product.image[0]}`}
                     alt="Product"
-                    className="h-full w-full object-cover lg:h-full lg:w-full rounded-full"
+                    className="h-[400px] w-full object-cover lg:h-full lg:w-full rounded-full"
                   />
                 </div>
                 <div className="mt-4 flex justify-between">
@@ -114,6 +115,7 @@ const MainColors = ({loading,error,data}) => {
                   <p className="text-sm font-medium px-5 text-gray-900">{product.price}</p>
                 </div>
               </div>
+              ) 
             ))}
           </Slider>
         </div>

@@ -1,36 +1,11 @@
 import { useState  } from 'react'
 import { RadioGroup } from '@headlessui/react'
-import threemodels from "../Data/Images/2.JPG"
-import secondBlue from "../Data/Images/1_side.JPG"
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { GetColorName } from 'hex-color-to-color-name';
 
-const product = {
-  name: 'Blue',
-  price: '$192',
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Men', href: '#' },
-  ],
-  images: [
-    
-    {
-      src: threemodels,
-      alt: 'Model wearing plain gray basic tee.',
-    },
-    {
-      src: secondBlue,
-      alt: 'Model wearing plain white basic tee.',
-    },
-  ],
-  colors: [
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-  ],
-  
-  
-}
 const sizes = [
   { name: 'S', inStock: true },
   { name: 'M', inStock: true },
@@ -59,35 +34,30 @@ export default function ProductDialog({loading,error,data,productId}) {
 
     if(loading) return <p>Loading....</p>
     if(error) return <p>Error! {console.error(error)}</p>
-    
+    const colorName = GetColorName(data.product.color); 
+
     return (
       <div className="bg-white">
         <div className="pt-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb">
             <ul className="flex items-center space-x-2 px-4 sm:px-6">
-              {product.breadcrumbs.map((breadcrumb) => (
-                <li key={breadcrumb.id}>
-                  <div className="flex items-center">
-                    <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
-                      {breadcrumb.name}
-                    </a>
-                    <svg
-                      width={16}
-                      height={20}
-                      viewBox="0 0 16 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                      className="h-5 w-4 text-gray-300"
-                    >
-                      <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                    </svg>
-                  </div>
-                </li>
-              ))}
+              <li>
+                <div className="flex items-center">
+                    {data.product.gender}
+                  <svg
+                    width={16}
+                    height={20}
+                    viewBox="0 0 16 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                    className="h-5 w-4 text-gray-300"
+                  >
+                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                  </svg>
+                </div>
+              </li>
               <li className="text-sm">
-                <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                  {product.name}
-                </a>
+                {colorName}
               </li>
             </ul>
           </nav>
@@ -129,7 +99,7 @@ export default function ProductDialog({loading,error,data,productId}) {
           </div>
 
             {/* Product info */}
-            <div className="lg:w-1/2">
+            <div className="lg:w-1/2 px-5 lg:px-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">{data.product.price}</p>
               <form className="mt-10">
@@ -155,7 +125,6 @@ export default function ProductDialog({loading,error,data,productId}) {
                     Size guide
                   </Link>
                 </div>
-                  {console.log(selectedSize)}
                 <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                   <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">

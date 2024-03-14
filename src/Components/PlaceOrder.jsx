@@ -77,16 +77,11 @@ function PlaceOrder({ size, productId, action }) {
             discountCode: promoCodeId,
             productOrder: [productId]
         }
-        console.log(handleOrder)
         action({variables: handleOrder})
     }
   return (
     <>
         <form onSubmit={(e)=>{handleSubmit(e)}}>
-            {
-                activeErrorMsg && 
-                    <Alert severity="error"> Promo code expired</Alert>
-            }
             <div className="space-y-12 px-10">
                 <div className="border-b border-gray-900/10 pb-12">
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -342,6 +337,10 @@ function PlaceOrder({ size, productId, action }) {
                     Cancel
                 </button>
             </div>
+            {
+                activeErrorMsg && 
+                    <Alert severity="error"> Promo code expired</Alert>
+            }
         </form>
     </>
   );

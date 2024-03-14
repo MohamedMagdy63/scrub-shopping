@@ -15,7 +15,7 @@ const AllProducts = ({loading,error,data}) => {
         </h1>
         <div className="grid grid-cols-2 gap-4">
           {data.productsFeed.map((product,index) => (
-            index <= 4 &&
+            index < 4 &&
               <Link key={product.id} to={`/product/${product.id}`} className="flex items-center justify-center">
                 <img src={`${process.env.REACT_APP_API_URL_IMAGE}/${product.image[1]}`} className="h-full object-contain" alt={product.color} />
               </Link>
