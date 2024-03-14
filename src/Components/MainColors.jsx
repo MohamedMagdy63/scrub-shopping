@@ -5,44 +5,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 
-// const products = [ 
-//   {
-//     id: 1,
-//     name: 'Royal Blue Scrub',
-//     src: '/product',
-//     imageSrc: blueImage,
-//     imageAlt: "Royal Blue Scrub.",
-//     price: '00.00',
-//     color: ["#1D24CA"],
-//   },
-//   {
-//     id: 2,
-//     name: 'Black Scrub',
-//     src: '/product',
-//     imageSrc: blackImage,
-//     imageAlt: "Black Scrub",
-//     price: '00:00',
-//     color: ["#000"],
-//   },
-//   {
-//     id: 3,
-//     name: 'Olive',
-//     src: '/product',
-//     imageSrc: Olive,
-//     imageAlt: "Olive Scrub",
-//     price: '00:00',
-//     color: ["#436850"],
-//   },
-//   {
-//     id: 4,
-//     name: 'Navy',
-//     src: '/product',
-//     imageSrc: Navy,
-//     imageAlt: "Navy",
-//     price: '00:00',
-//     color: ["#201658"],
-//   },
-// ]
 const ProductColors = ({ color }) => {
   return (
     <div className="flex items-center space-x-2">
@@ -68,6 +30,7 @@ const MainColors = ({loading,error,data}) => {
   // Subscribe to the resize event on component mount
   useEffect(() => {
     window.addEventListener('resize', updateScreenSize);
+    console.log()
 
     // Clean up the event listener on component unmount
     return () => {
@@ -85,7 +48,6 @@ const MainColors = ({loading,error,data}) => {
 
   if(loading) return <p>Loading....</p>
   if(error) return <p>Error! {console.error(error)}</p>
-
   return (
     <div className='m-1 h-fit'>
       <h1 className='p-3 text-4xl font-semibold text-center'>Shop By Color</h1>
@@ -93,6 +55,7 @@ const MainColors = ({loading,error,data}) => {
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
           <Slider {...settings}>
             {data.productsFeed.map((product , index) => (
+  
               index < 5 && (
                 <div key={product.id} className="group relative">
                 <div className="aspect-h-1 bg-gray-50 border aspect-w-1 w-full overflow-hidden rounded-md  lg:aspect-none group-hover:opacity-75 lg:h-80">

@@ -13,24 +13,17 @@ import Alert from '@mui/material/Alert';
 
 function Home() {
   const {loading,error,data} = useQuery(GetProducts)
-  const [showAlert,setShowAlert] = useState(false)
   const location = useLocation()
+  console.log(location.state)
   useEffect(() => {
-    if(location.state.successMsg){
-      setShowAlert(true)
-      setInterval(() => {
-        setShowAlert(false)
-      }, 2000);
-    }
+   
     // Scroll to the top of the page when the component mounts (page loads)
     window.scrollTo(0, 0);
   }, []);
   return (
     <>
       <Navbar/>
-      {
-        showAlert && <Alert severity="success">location.state.successMsg</Alert>
-      }
+      
       <MainLayout/>
       <MainColors loading={loading} error={error} data={data}/>
       <AllProducts loading={loading} error={error} data={data}/>
