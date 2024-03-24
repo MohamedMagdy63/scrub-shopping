@@ -33,7 +33,7 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <a href="https://mohamedmagdy.vercel.app/" className="flex items-center justify-center p-2">
+      <a href="https://webx-crafters.vercel.app/" className="flex items-center justify-center p-2">
         <span className="uppercase">Created by -</span> 
         <span className="px-1">
           <span className="text-xl font-bold bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">W</span>ebX-Crafters

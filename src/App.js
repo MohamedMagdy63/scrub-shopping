@@ -9,6 +9,7 @@ import OrdersPage from './Pages/OrdersPage';
 import About from './Pages/About';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import WomanCategory from './Pages/WomanCategory';
+import SizeGuide from './Components/sizeGuide';
 
 function App() {
   const uri = process.env.REACT_APP_API_URL
@@ -24,8 +25,9 @@ function App() {
           <Route path="/men" element={<Category />} />
           <Route path="/women" element={<WomanCategory />} />
           <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/order" element={<OrdersPage />} />
+          <Route path="/order/" element={<OrdersPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/sizeGuide/" element={<SizeGuide />} />
           {/* Add other routes as needed */}
         </Routes>
       </BrowserRouter>

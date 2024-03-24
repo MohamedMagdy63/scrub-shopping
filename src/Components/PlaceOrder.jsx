@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { CheckPromoCode } from "../gql/Query";
 import { Alert } from "@mui/material";
 
-function PlaceOrder({ size, productId, basicPrice, action }) {
+function PlaceOrder({size, productId, basicPrice, action }) {
     const [fullName , setFullName ] = useState(null)
     const [email , setEmail ] = useState(null)
     const [phone , setPhone ] = useState(null)
@@ -187,8 +187,8 @@ function PlaceOrder({ size, productId, basicPrice, action }) {
                                 autoComplete="Amount-name"
                                 onChange={handleAmount}
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2  sm:max-w-xs  sm:text-m sm:leading-6 outline-none"
-                                >
-                                    <option>Choose number</option>
+                                >   
+                                    <option> </option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -273,33 +273,26 @@ function PlaceOrder({ size, productId, basicPrice, action }) {
                                             type="radio"
                                             id="insta-bay"
                                             name="payment-method"
-                                            value="Insta Bay"
+                                            value="Insta Pay"
                                             onChange={handlePayment}
                                             className="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
                                         />
-                                        <span className="ml-2 text-sm text-gray-900">Insta Bay</span>
+                                        <span className="ml-2 text-sm text-gray-900">Insta Pay</span>
                                     </label>
-                                    <label className="flex items-center cursor-pointer">
-                                    <input
-                                        type="radio"
-                                        id="visa-mastercard"
-                                        name="payment-method"
-                                        value="Visa or Mastercard"
-                                        onChange={handlePayment}
-                                        className="form-radio h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
-                                    />
-                                    <span className="ml-2 text-sm text-gray-900">Visa or Mastercard</span>
-                                    </label>
+                                    
                                 </div>
-                                {payment === 'Insta Bay' && (
+                                {payment === 'Insta Pay' && (
                                     <div className="sm:col-span-3">
+                                        <p className="p-5 font-semibold">User: hindawi1@instapay</p>
                                         <label htmlFor="transaction" className="block text-sm font-medium leading-6 text-gray-900">
-                                        Transaction <span className="text-red-600">*</span> 
+                                        Transaction image <span className="text-red-600">*</span> 
                                         </label>
                                         <div className="mt-2">
                                             <input
+                                                type="file"
                                                 id="transaction-id"
                                                 name="transaction-id"
+                                                accept="image/*"
                                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  sm:text-m sm:leading-6 outline-none"
                                                 onChange={(e)=>{
                                                     setTransactionId(e.target.value)
@@ -307,11 +300,6 @@ function PlaceOrder({ size, productId, basicPrice, action }) {
                                             />
                                         </div>
                                     </div>
-                                )}
-                                {payment === 'Visa or Mastercard' && (
-                                <div>
-                                
-                                </div>
                                 )}
                             </div>
                          </div>

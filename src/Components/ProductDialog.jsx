@@ -121,7 +121,7 @@ export default function ProductDialog({loading,error,data,productId}) {
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <Link to="/about" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                  <Link to="/sizeGuide" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                     Size guide
                   </Link>
                 </div>
