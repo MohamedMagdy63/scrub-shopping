@@ -19,9 +19,9 @@ function SizeGuide() {
       <h1 className="text-2xl font-semibold text-gray-900 text-center mt-5">
         Sizes for Men & Women
       </h1>
-      <div className="flex flex-col md:flex-row">
-        <img className="w-2/4 h-2/4 md:w-1/2 p-5" src={WomenSize} alt="" />
-        <img className="w-2/4 h-2/4 md:w-1/2 p-5" src={MenSize} alt="" />
+      <div className="flex flex-col">
+        <img className="w-full h-2/4 md:w-1/2 p-5" src={WomenSize} alt="" />
+        <img className="w-full h-2/4 md:w-1/2 p-5" src={MenSize} alt="" />
       </div>
       <Footer />
     </div>
