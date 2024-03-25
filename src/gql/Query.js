@@ -1,39 +1,58 @@
 const { gql } = require("@apollo/client");
 
 const GetProducts = gql`
-query Query {
-    productsFeed {
-      id
-      gender
+query Product {
+  productsFeed {
+    id
+    price
+    status
+    color {
       color
-      image
-      price
-      status
+      colorName
+      id
     }
+    gender
+    amounts
+    createdAt
+    updatedAt
+    image
+  }
 }
 `
 const GetProductByType = gql`
-query Query($gender: String!) {
-    productType(gender: $gender) {
+query Product($gender: String!) {
+  productType(gender: $gender) {
+    id
+    amounts
+    gender
+    image
+    price
+    status
+    color {
       id
       color
-      gender
-      image
-      price
-      status
+      colorName
     }
+    updatedAt
+    createdAt
+  }
 }
 `
 const GetProductByID = gql`
-query Query($productId: ID!) {
-    product(id: $productId) {
+query Product($productId: ID!) {
+  product(id: $productId) {
+    id
+    gender
+    amounts
+    image
+    price
+    status
+    color {
       id
-      gender
       color
-      image
-      price
-      status
+      colorName
     }
+  }
 }
 `
 const CheckPromoCode = gql`

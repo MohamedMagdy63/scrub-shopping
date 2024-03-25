@@ -4,7 +4,6 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { GetColorName } from 'hex-color-to-color-name';
 
 const sizes = [
   { name: 'S', inStock: true },
@@ -34,7 +33,6 @@ export default function ProductDialog({loading,error,data,productId}) {
 
     if(loading) return <p>Loading....</p>
     if(error) return <p>Error! {console.error(error)}</p>
-    const colorName = GetColorName(data.product.color); 
 
     return (
       <div className="bg-white">
@@ -57,7 +55,7 @@ export default function ProductDialog({loading,error,data,productId}) {
                 </div>
               </li>
               <li className="text-sm">
-                {colorName}
+                {data.product.color.colorName}
               </li>
             </ul>
           </nav>
@@ -70,6 +68,7 @@ export default function ProductDialog({loading,error,data,productId}) {
               {
                 data.product.image.map((imge,idx)=>(
                   <img
+                    key={idx}
                     src={`${imge}`}
                     alt='Product'
                     className={
@@ -110,8 +109,8 @@ export default function ProductDialog({loading,error,data,productId}) {
                     <div className="flex items-center space-x-2">
                       <div
                         className="w-8 h-8 rounded-full"
-                        style={{ backgroundColor: data.product.color, border: "1px solid #ccc" }}
-                        title={data.product.color}
+                        style={{ backgroundColor: data.product.color.color, border: "1px solid #ccc" }}
+                        title={data.product.colorName}
                       />
                     </div>
                   </div>

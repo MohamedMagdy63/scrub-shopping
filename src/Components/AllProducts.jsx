@@ -17,7 +17,7 @@ const AllProducts = ({loading,error,data}) => {
           {data.productsFeed.map((product,index) => (
             index < 4 &&
               <Link key={product.id} to={`/product/${product.id}`} className="flex items-center justify-center">
-                <img src={`${product.image[1]}`} className="h-full object-contain" alt={product.color} />
+                <img src={`${product.image[1]}`} className="h-full object-contain" alt={product.color.colorName} />
               </Link>
           ))}
         </div>

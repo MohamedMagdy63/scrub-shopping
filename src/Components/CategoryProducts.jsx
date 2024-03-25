@@ -31,8 +31,8 @@ const CategoryProducts = ({loading,error,data,type}) => {
                   className="h-full w-full object-contain object-center group-hover:opacity-75"
                 />
               </div>
-              <ProductColors color={product.color} />
-              <p className="mt-1 text-lg font-medium text-center text-gray-900">{product.price}</p>
+              <ProductColors color={product.color.colorName} />
+              <p className="mt-1 text-lg font-medium text-center text-gray-900">{product.price} EGP</p>
             </Link>
           ))
         }

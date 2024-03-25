@@ -7,7 +7,7 @@ import Footer from '../Components/Footer';
 import { useQuery } from '@apollo/client';
 import { GetProducts } from '../gql/Query'
 import { useLocation } from 'react-router-dom';
-import Alert from '@mui/material/Alert';
+
 
 
 
@@ -23,7 +23,6 @@ function Home() {
   return (
     <>
       <Navbar/>
-      
       <MainLayout/>
       <MainColors loading={loading} error={error} data={data}/>
       <AllProducts loading={loading} error={error} data={data}/>

@@ -73,9 +73,9 @@ const MainColors = ({loading,error,data}) => {
                         {product.status}
                       </Link>
                     </h3>
-                      <ProductColors color={product.color} />
+                      <ProductColors color={product.color.colorName} />
                   </div>
-                  <p className="text-sm font-medium px-5 text-gray-900">{product.price}</p>
+                  <p className="text-sm font-medium px-5 text-gray-900">{product.price} EGP</p>
                 </div>
               </div>
               ) 
