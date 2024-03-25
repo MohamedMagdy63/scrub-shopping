@@ -39,7 +39,7 @@ const MainColors = ({loading,error,data}) => {
   }, []); // Empty dependency array ensures the effect runs only once during component mount
 
   const settings = {
-    infinite: true,
+    infinite: data.productsFeed.length > 3 ? true : false,
     slidesToShow: screenSize.width >= 500 ? 4: 1, 
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
@@ -55,9 +55,9 @@ const MainColors = ({loading,error,data}) => {
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-12 lg:max-w-7xl lg:px-8">
           <Slider {...settings}>
             {data.productsFeed.map((product , index) => (
-  
+              
               index < 5 && (
-                <div key={product.id} className="group relative">
+              <div key={product.id} className="group relative">
                 <div className="aspect-h-1 bg-gray-50 border aspect-w-1 w-full overflow-hidden rounded-md  lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <img
                     src={`${product.image[0]}`}
