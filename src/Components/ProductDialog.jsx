@@ -54,7 +54,7 @@ export default function ProductDialog({loading,error,data,productId}) {
                   </svg>
                 </div>
               </li>
-              <li className="text-sm">
+              <li className="text-sm capitalize">
                 {data.product.color.colorName}
               </li>
             </ul>
@@ -102,11 +102,11 @@ export default function ProductDialog({loading,error,data,productId}) {
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">{data.product.price}EGP</p>
               {data.product.status === 'In Stock' ?
-                <p className='bg-blue-500  text-white m-1 p-1 rounded-md'>
+                <p className='bg-blue-500 text-sm w-14 text-white p-1 rounded-md'>
                   In Stock
                 </p>
                 :
-                <p className='bg-red-900  text-white m-1 p-1 rounded-md'>
+                <p className='bg-red-900 text-sm w-24 text-white p-1 rounded-md'>
                   Out Of Stock
                 </p>
               }
