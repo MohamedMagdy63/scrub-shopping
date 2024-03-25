@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const ProductColors = ({ color }) => {
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 m-1">
       <div
         className="w-6 h-6 rounded-full"
         style={{ backgroundColor: color, border: "1px solid #ccc" }}
@@ -67,15 +67,24 @@ const MainColors = ({loading,error,data}) => {
                 </div>
                 <div className="mt-4 flex justify-between">
                   <div>
+                    
                     <h3 className="text-sm text-gray-700">
                       <Link to={`/product/${product.id}`}>
                         <span aria-hidden="true" className="absolute inset-0" />
-                        {product.status}
+                        {product.status === 'In Stock' ?
+                        <p className='bg-blue-500 text-white m-1 p-1 rounded-md'>
+                          In Stock
+                        </p>
+                        :
+                        <p className='bg-red-900 text-white m-1 p-1 rounded-md'>
+                          Out Of Stock
+                        </p>
+                        }
                       </Link>
                     </h3>
-                      <ProductColors color={product.color.colorName} />
+                      <ProductColors  color={product.color.colorName} />
                   </div>
-                  <p className="text-sm font-medium px-5 text-gray-900">{product.price} EGP</p>
+                  <p className="text-sm font-medium px-5  text-gray-900">{product.price} EGP</p>
                 </div>
               </div>
               ) 
