@@ -39,7 +39,7 @@ const MainColors = ({loading,error,data}) => {
   }, []); // Empty dependency array ensures the effect runs only once during component mount
 
   const settings = {
-    infinite: data.productsFeed.length > 3 ? true : false,
+    infinite: data && data.productsFeed.length > 3 ? true : false,
     slidesToShow: screenSize.width >= 500 ? 4: 1, 
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
