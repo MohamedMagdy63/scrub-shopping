@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { CheckPromoCode } from "../gql/Query";
 import { Alert } from "@mui/material";
 
-function PlaceOrder({size, productId, basicPrice, action, lodingUploadData }) {
+function PlaceOrder({size, productId, basicPrice, action, lodingUploadData, productImages }) {
     const [fullName , setFullName ] = useState(null)
     const [email , setEmail ] = useState(null)
     const [phone , setPhone ] = useState(null)

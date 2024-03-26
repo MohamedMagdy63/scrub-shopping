@@ -187,7 +187,7 @@ export default function ProductDialog({loading,error,data,productId}) {
               data.product.status === 'In Stock' ? 
               <div className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-[#AAD7D9] cursor-pointer px-8 py-3 text-base font-medium text-white hover:bg-[#92C7CF] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 onClick={()=>{
-                  navigate('/order',{state:{sizeVal: selectedSize, productId:productId, price:data.product.price}})
+                  navigate('/order',{state:{sizeVal: selectedSize, productId:productId, price:data.product.price, images:data.product.image}})
                 }}
                 >
                   Oreder Now

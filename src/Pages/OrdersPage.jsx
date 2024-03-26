@@ -21,7 +21,7 @@ function OrdersPage() {
   return (
     <>
         <Navbar/>
-        <PlaceOrder size={location.state.sizeVal} productId={location.state.productId} basicPrice={location.state.price} lodingUploadData={loading} action={makeOrder}/>
+        <PlaceOrder size={location.state.sizeVal} productId={location.state.productId} productImages={location.state.images} basicPrice={location.state.price} lodingUploadData={loading} action={makeOrder}/>
         <Footer/>
     </>
   );
