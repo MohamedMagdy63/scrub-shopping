@@ -9,7 +9,7 @@ import { MakeOrder } from '../gql/Mutation'
 function OrdersPage() {
   const location = useLocation()
   const navigate = useNavigate()
-  const [makeOrder] = useMutation(MakeOrder,{
+  const [makeOrder ,{loading}] = useMutation(MakeOrder,{
     onCompleted:()=>{
     navigate('/',{state:{successMsg: "Order Completed"}})
     }
@@ -21,7 +21,7 @@ function OrdersPage() {
   return (
     <>
         <Navbar/>
-        <PlaceOrder size={location.state.sizeVal} productId={location.state.productId} basicPrice={location.state.price} action={makeOrder}/>
+        <PlaceOrder size={location.state.sizeVal} productId={location.state.productId} basicPrice={location.state.price} lodingUploadData={loading} action={makeOrder}/>
         <Footer/>
     </>
   );

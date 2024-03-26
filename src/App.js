@@ -10,11 +10,14 @@ import About from './Pages/About';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import WomanCategory from './Pages/WomanCategory';
 import SizeGuide from './Components/sizeGuide';
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 function App() {
   const uri = process.env.REACT_APP_API_URL
   const client = new ApolloClient({
-    uri: uri ,
+    link: createUploadLink({
+      uri: uri,
+    }),
     cache: new InMemoryCache(),
   });
   return (

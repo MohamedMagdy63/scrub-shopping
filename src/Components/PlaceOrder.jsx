@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { CheckPromoCode } from "../gql/Query";
 import { Alert } from "@mui/material";
 
-function PlaceOrder({size, productId, basicPrice, action }) {
+function PlaceOrder({size, productId, basicPrice, action, lodingUploadData }) {
     const [fullName , setFullName ] = useState(null)
     const [email , setEmail ] = useState(null)
     const [phone , setPhone ] = useState(null)
@@ -76,14 +76,27 @@ function PlaceOrder({size, productId, basicPrice, action }) {
             amount: [parseFloat(amount)],
             payway: payment,
             commentQ: question,
-            orderNumber: parseFloat(transactionId),
+            orderNumber: transactionId,
             discountCode: promoCodeId,
             productOrder: [productId]
         }
         action({variables: handleOrder})
     }
   return (
-    <>
+    <div className="relative">
+        {
+            lodingUploadData &&
+                <div className='fixed top-0 left-0 w-full h-screen bg-layout z-50
+                flex justify-center items-center'>
+                    <div
+                    className="inline-block h-14 w-14 animate-spin rounded-full 
+                    border-[10px] border-solid border-current border-e-transparent 
+                    align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] 
+                    dark:text-white"
+                    role="status">
+                    </div>
+                </div>
+        }
         <form onSubmit={(e)=>{handleSubmit(e)}}>
             <div className="space-y-12 px-10">
                 <div className="border-b border-gray-900/10 pb-12">
@@ -295,9 +308,9 @@ function PlaceOrder({size, productId, basicPrice, action }) {
                                                 accept="image/*"
                                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  sm:text-m sm:leading-6 outline-none"
                                                 onChange={(e)=>{
-                                                    setTransactionId(e.target.value)
+                                                    setTransactionId(e.target.files[0])
                                                 }}
-                                            />
+                                                />
                                         </div>
                                     </div>
                                 )}
@@ -345,7 +358,7 @@ function PlaceOrder({size, productId, basicPrice, action }) {
                     <Alert severity="error"> Promo code expired</Alert>
             }
         </form>
-    </>
+    </div>
   );
 }
 
