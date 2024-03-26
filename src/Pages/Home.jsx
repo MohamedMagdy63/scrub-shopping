@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import MainColors from '../Components/MainColors';
 import MainLayout from '../Components/MainLayout';
 import AllProducts from '../Components/AllProducts';

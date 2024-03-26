@@ -2,8 +2,6 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import React, { useEffect } from 'react';
 import Hindawi from '../Data/Images/AboutData/Hindawi.JPG'
-import WomenSize from '../Data/Images/AboutData/WomenSize.PNG'
-import MenSize from '../Data/Images/AboutData/MenSize.PNG'
 
 
 
