@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CheckPromoCode } from "../gql/Query";
 import { Alert } from "@mui/material";
 
+
 function PlaceOrder({size, productId, basicPrice, action, lodingUploadData, productImages }) {
     const [fullName , setFullName ] = useState(null)
     const [email , setEmail ] = useState(null)
@@ -59,6 +60,7 @@ function PlaceOrder({size, productId, basicPrice, action, lodingUploadData, prod
     const handleQuestion = (event) =>{
         setQuestions(event.target.value)
     }
+    const [imageIndex,setImageIndex] = useState(0)
     const handleSubmit = (event) =>{
         event.preventDefault();
         if(promoCode && promoCodeIsExpired){
@@ -86,21 +88,49 @@ function PlaceOrder({size, productId, basicPrice, action, lodingUploadData, prod
     <div className="relative">
         {
             lodingUploadData &&
-                <div className='fixed top-0 left-0 w-full h-screen bg-layout z-50
-                flex justify-center items-center'>
-                    <div
-                    className="inline-block h-14 w-14 animate-spin rounded-full 
-                    border-[10px] border-solid border-current border-e-transparent 
-                    align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] 
-                    dark:text-white"
-                    role="status">
-                    </div>
+            <div className='fixed top-0 left-0 w-full h-screen bg-layout z-50
+            flex justify-center items-center'>
+                <div
+                className="inline-block h-14 w-14 animate-spin rounded-full 
+                border-[10px] border-solid border-current border-e-transparent 
+                align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] 
+                dark:text-white"
+                role="status">
                 </div>
+            </div>
         }
         <form onSubmit={(e)=>{handleSubmit(e)}}>
-            <div className="space-y-12 px-10">
-                <div className="border-b border-gray-900/10 pb-12">
-                    <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            
+            <div className="grid lg:grid-cols-4 space-y-4 px-10">
+                {/* Image (for large screens) */}
+                <div className="block col-span-2 lg:w-full">
+                    {
+                        <div className="aspect-h-4 p-3 aspect-w-3  overflow-hidden rounded-lg block">
+                            <img
+                                src={productImages[imageIndex]}
+                                alt='Product wanted'
+                                className="h-1/2 w-[400px] object-fit rounded-xl
+                                shadow-cardShadow mb-8 bg-transparent"
+                                
+                            />
+                            {
+                                productImages[1] &&
+                                <div className="grid grid-cols-4  gap-3 w-[350px]">
+                                    {productImages.map((image, idx) => (
+                                        <img 
+                                            src={image} 
+                                            alt='Product wanted'
+                                            className={`h-[150px] w-[150px] lg:h-[150px] lg:w-[150px] object-cover rounded-xl shadow-cardShadow object-center cursor-pointer ${idx === imageIndex ? "border-2 border-primary border-solid": "border-none"}`}
+                                            onClick={() => setImageIndex(idx)}
+                                        />
+                                    ))}
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+                <div className=" border-gray-900/10 pb-12">
+                    <div className="gap-y-8 sm:grid-cols-6">
                         <div className="sm:col-span-3">
                             <label htmlFor="full-name" className="block text-sm font-medium leading-6 text-gray-900">
                                 Full name <span className="text-red-600">*</span> 

@@ -14,7 +14,11 @@ module.exports = {
     "src/Pages/About.jsx",
 ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow:{
+        'cardShadow': `-1px 3px 13px 2px rgba(0,0,0,0.75)`
+      }
+    },
   },
   plugins: [],
 }
